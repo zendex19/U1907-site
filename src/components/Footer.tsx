@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
     <footer className="py-6 px-4 text-center">
-      <p className="text-xs text-muted-foreground/50">
+      <p className="text-xs text-muted-foreground/70">
         © 2026 Lohith Srikar · Licensed under{" "}
         <a
           href="https://github.com/zndx-sh/zndx-blog/blob/main/LICENSE"

@@ -35,8 +35,11 @@ const HomePage = () => {
           <section className="mb-16 md:mb-20">
             <div className="flex items-center gap-4 mb-4">
               <img 
-                src="/pfp.png" 
+                src="/pfp.webp" 
                 alt="Lohith Srikar"
+                width={96}
+                height={96}
+                fetchPriority="high"
                 className="w-24 h-24 rounded-full object-cover shrink-0"
               />
               <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">

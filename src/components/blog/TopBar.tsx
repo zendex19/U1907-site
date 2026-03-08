@@ -81,6 +81,7 @@ export const TopBar = ({ sidebarOpen, onToggleSidebar, showMenuButton = true, sh
           href="https://github.com/zndx-sh/zndx-blog"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="GitHub repository"
           className="text-muted-foreground hover:text-foreground transition-colors flex"
         >
           <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
