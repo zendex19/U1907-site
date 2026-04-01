@@ -12,24 +12,24 @@ This is a writeup on a challenge [ASCII-CRACK](https://crackmes.one/crackme/69a8
 
 ![info](https://raw.githubusercontent.com/U1907/U1907-site-images/refs/heads/main/ascii/ascii-crack-info.png)
 
-so we are given an `ELF 64-bit LSB pie executable` file named `ascii`
+So we are given an `ELF 64-bit LSB pie executable` file named `ascii`.
 
-when run on a linux machine it asks for user input
+When run on a Linux machine, it asks for user input:
 ```bash
 # filename: ascii
 u1907@debian:~/crackme$ ./ascii
 Usage: ./script <flag>
 ```
 
-so the author expects us to find the flag itself. well then, lets start up ghidra
-after analyzing the `ascii` file with ghidra, we get to see what is called approximate source code
-we can see that there are 3 functions including `main`
+So the author expects us to find the flag itself. Well then, let's start up Ghidra.
+After analyzing the `ascii` file with Ghidra, we get to see what is called decompiled source code.
+We can see that there are 3 functions including `main`.
 
 ![func-info](https://raw.githubusercontent.com/U1907/U1907-site-images/refs/heads/main/ascii/functions-ascii.png)
 
 ## Main Function Analysis
 
-Lets analyze main function
+Let's analyze the main function:
 ```cpp
 #filename: decomplied-main ascii
 
@@ -106,16 +106,16 @@ undefined8 main(int param_1,long user_input)
 }
 
 ```
-well, yeah thats better than pasting image here.
+Well, that's better than pasting an image here.
 
-Anyways, the `param_1` & `param_2` are our classic `argc` and `argv`
-the main code begins off by checking if user provided an input or not with initial `if-then` condition, else the program will prompt user for `flag`.
+Anyway, `param_1` and `param_2` are our classic `argc` and `argv`.
+The main code begins by checking if the user provided an input with the initial `if-then` condition; otherwise, the program prompts the user for the `flag`.
 
-On the line 27, the `user_input` is being copied into variable `local_88`, after that the program enters into a while true loop with `i` as counter it seems. 
+On line 27, the `user_input` is being copied into variable `local_88`. After that, the program enters a while loop with `i` as the counter.
 
-On the line 37, program is checking if the loop iterated entirely over the user_input, if yes it breaks the loop there itself. if not, it does the math `6 - i` and stores in variable `iVar2`. program flow seems pretty normal till now.
+On line 37, the program checks if the loop has iterated entirely over the `user_input`. If yes, it breaks the loop. If not, it calculates `6 - i` and stores it in variable `iVar2`. The program flow seems straightforward up to this point.
 
-Line 40 is where the real stuff begins. `string::operator[]` extracts byte by byte at each iteration and passes it as argument to `encode` function along with `iVar2`. output is stored in `cVar1`
+Line 40 is where the real work begins. `string::operator[]` extracts one byte at each iteration and passes it to the `encode` function along with `iVar2`. The output is stored in `cVar1`.
 
 ### Encode Function
 
@@ -129,12 +129,12 @@ char encode(char param_1,int param_2)
 }
 
 ```
-ahh that's a pretty normal looking encode function. it just shifts characters forward by `6 - i`. 
+Ah, that's a pretty normal-looking encode function. It simply shifts characters forward by `6 - i`.
 
-lets go back to main function. The variable `cVar1` is copied to `local_48` which in turn is passed to verify function
+Let's go back to the main function. The variable `cVar1` is copied to `local_48`, which is then passed to the verify function.
 ### Verify Function
 
-here is the decompiled verify function
+Here is the decompiled verify function:
 ```cpp
 # filename: decompiled-verify ascii
 bool verify(string *param_1)
@@ -147,16 +147,16 @@ bool verify(string *param_1)
 }
 ```
 
-ahh, what do we have here, encoded_flag perhaps? well if we can grab that encoded flag, we can simply decode it to get the real flag.
+Ah, what do we have here? The `encoded_flag`, perhaps? Well, if we can grab that encoded flag, we could simply decode it to get the real flag.
 
-normally i have expected a plain text when i clicked on variable in ghidra. but i found nothing. 
+Normally, I would have expected to see plain text when clicking on the variable in Ghidra, but I found nothing. 
 ![encode-var](https://raw.githubusercontent.com/U1907/U1907-site-images/refs/heads/main/ascii/encode.png)
 
 ## Finding the Encoded Flag
 
-This has to do with language it is written in, which is `C++` in this case. you see, in languages like `C`, a string is basically a bunch of characters, which are in fact basically some numbers in memory. whenever there is a string in C program, compiler takes string and hardcodes it into `.rodata` section of the file. but in C++, thats not the case. The encoded flag is a data object called `std::string`, it doesnt hold the text, rather it points to memory, length variable and capacity variable. To build such objects, C++ has the concept of `constructors` which allocates the space at run time for string and some other properties. but to build it, constructors still need raw data. Thats where our encoded flag is perhaps. This raw data is cross-referenced during run time. ghidra shows what cross references happen with the object initialization. we can see a bunch of `static_initialization_and_destruction` in the image above, those are the cross references of raw ingredients. 
+This has to do with the language it is written in: `C++`. You see, in languages like `C`, a string is basically a sequence of characters, which are essentially numbers in memory. Whenever there is a string in a C program, the compiler takes the string and hardcodes it into the `.rodata` section of the file. But in C++, that's not the case. The encoded flag is a data object called `std::string`, which doesn't hold the text directly. Rather, it points to memory, a length variable, and a capacity variable. To build such objects, C++ has the concept of `constructors`, which allocates space at runtime for the string and other properties. But to build it, the constructors still need raw data. That's where our encoded flag is. This raw data is cross-referenced at runtime. Ghidra shows what cross-references occur during object initialization. We can see a bunch of `static_initialization_and_destruction` functions in the image above; those are the cross-references for the raw data. 
 
-by clicking on the reference, i was greeted with this pleasant initialization code
+By clicking on the reference, I was greeted with this pleasant initialization code:
 ```cpp
 # filename: static_initialization_and_destruction
 void __static_initialization_and_destruction_0(void)
@@ -183,8 +183,8 @@ void __static_initialization_and_destruction_0(void)
 ```
 ## Decoding Script
 
-yeah, now we can be sure that we got the encoded flag `IYJ~U4cQ1Q[<mL[(U;`\'Ynk/M-i`
-now we are sure how encoding happens, a simple decoding function can be written in python as follows
+Now we can be sure we have the encoded flag: `IYJ~U4cQ1Q[<mL[(U;`\'Ynk/M-i`.
+Now that we understand how the encoding works, we can write a simple decoding function in Python:
 ```python
 # filename: decode.py
 enc_flag="IYJ~U4cQ1Q[<mL[(U;`\'Ynk/M-i"
@@ -195,4 +195,4 @@ for i in range(len(enc_flag)):
 
 print(denc_flag)
 ```
-voila! it simply works!
+Voilà! It works!
