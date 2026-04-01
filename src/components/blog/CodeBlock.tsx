@@ -9,6 +9,28 @@ interface CodeBlockProps {
   filename?: string;
 }
 
+const escapeHtml = (unsafe: string) => {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
+const createFallbackHtml = (rawCode: string) => {
+  const lines = rawCode.split("\n");
+  const safeLines = lines.map((line) => {
+    // Preserve empty lines so line numbers match the source exactly.
+    const escaped = escapeHtml(line);
+    return escaped.length > 0 ? escaped : "&nbsp;";
+  });
+
+  return `<pre class="shiki" tabindex="0"><code>${safeLines
+    .map((line) => `<span class="line">${line}</span>`)
+    .join("")}</code></pre>`;
+};
+
 export const CodeBlock = ({ code, language = "typescript", filename }: CodeBlockProps) => {
   const [copied, setCopied] = useState(false);
   const [highlightedHtml, setHighlightedHtml] = useState<string>("");
@@ -57,7 +79,9 @@ export const CodeBlock = ({ code, language = "typescript", filename }: CodeBlock
       <div
         ref={containerRef}
         className="shiki-container"
-        dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+        dangerouslySetInnerHTML={{
+          __html: highlightedHtml || createFallbackHtml(code)
+        }}
       />
     </div>
   );

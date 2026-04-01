@@ -36,7 +36,7 @@ export const LazyImage = ({ src, alt, caption, onClick, className }: LazyImagePr
     <div
       ref={imgRef}
       className={cn(
-        "relative rounded-md my-6 overflow-hidden",
+        "relative rounded-md my-5 overflow-hidden",
         !isLoaded && "bg-muted",
         className
       )}

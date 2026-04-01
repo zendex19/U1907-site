@@ -13,13 +13,32 @@ interface BlogContentProps {
   post: BlogPost;
 }
 
-// Helper to render text with inline code (backticks)
-const renderInlineCode = (text: string): React.ReactNode => {
-  if (!text.includes("`")) return text;
+// Helper to render text with inline code (backticks) and Markdown links
+const renderFormattedText = (text: string): React.ReactNode => {
+  if (!text) return text;
   
-  return text.split("`").map((part, i) =>
-    i % 2 === 0 ? part : <code key={i}>{part}</code>
-  );
+  // Regex to match inline code blocks (`code`) or markdown links ([text](url))
+  const parts = text.split(/(`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
+  
+  return parts.map((part, i) => {
+    if (part.startsWith("`") && part.endsWith("`")) {
+      return <code key={i}>{part.slice(1, -1)}</code>;
+    }
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      return (
+        <a 
+          key={i} 
+          href={linkMatch[2]} 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          {linkMatch[1]}
+        </a>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
 };
 
 export const BlogContent = ({ post }: BlogContentProps) => {
@@ -37,14 +56,14 @@ export const BlogContent = ({ post }: BlogContentProps) => {
   const renderContentBlock = (block: ContentBlock, index: number) => {
     switch (block.type) {
       case "paragraph":
-        return <p key={index}>{block.content}</p>;
+        return <p key={index}>{renderFormattedText(block.content || "")}</p>;
       
       case "heading":
         const HeadingTag = `h${block.level || 2}` as keyof JSX.IntrinsicElements;
         const headingId = headingIds.get(index) || "";
         return (
           <HeadingTag key={index} id={headingId}>
-            {block.content}
+            {renderFormattedText(block.content || "")}
           </HeadingTag>
         );
       
@@ -62,7 +81,7 @@ export const BlogContent = ({ post }: BlogContentProps) => {
         return (
           <ul key={index}>
             {block.items?.map((item, i) => (
-              <li key={i}>{item}</li>
+              <li key={i}>{renderFormattedText(item)}</li>
             ))}
           </ul>
         );
@@ -71,13 +90,13 @@ export const BlogContent = ({ post }: BlogContentProps) => {
         return (
           <ol key={index}>
             {block.items?.map((item, i) => (
-              <li key={i}>{item}</li>
+              <li key={i}>{renderFormattedText(item)}</li>
             ))}
           </ol>
         );
       
       case "blockquote":
-        return <blockquote key={index}>{block.content}</blockquote>;
+        return <blockquote key={index}>{renderFormattedText(block.content || "")}</blockquote>;
       
       case "divider":
         return <hr key={index} />;
@@ -85,9 +104,7 @@ export const BlogContent = ({ post }: BlogContentProps) => {
       case "inline-code":
         return (
           <p key={index}>
-            {block.content?.split("`").map((part, i) =>
-              i % 2 === 0 ? part : <code key={i}>{part}</code>
-            )}
+            {renderFormattedText(block.content || "")}
           </p>
         );
       
@@ -116,7 +133,7 @@ export const BlogContent = ({ post }: BlogContentProps) => {
                         i !== 0 && "border-l border-border"
                       )}
                     >
-                      {renderInlineCode(header)}
+                      {renderFormattedText(header)}
                     </th>
                   ))}
                 </tr>
@@ -135,7 +152,7 @@ export const BlogContent = ({ post }: BlogContentProps) => {
                           cellIndex !== 0 && "border-l border-border"
                         )}
                       >
-                        {renderInlineCode(cell)}
+                        {renderFormattedText(cell)}
                       </td>
                     ))}
                   </tr>
@@ -152,7 +169,7 @@ export const BlogContent = ({ post }: BlogContentProps) => {
             variant={block.calloutVariant || "note"}
             title={block.calloutTitle || "Note"}
           >
-            {renderInlineCode(block.content || "")}
+            {renderFormattedText(block.content || "")}
           </Callout>
         );
       

@@ -5,9 +5,29 @@
     <link>https://0x1907.netlify.app</link>
     <description>A blog about programming, systems, and engineering</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2026 06:27:45 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 01 Apr 2026 11:24:20 GMT</lastBuildDate>
     <atom:link href="https://0x1907.netlify.app/rss.xml" rel="self" type="application/rss+xml"/>
     
+    <item>
+      <title>ASCII-CRACK</title>
+      <link>https://0x1907.netlify.app/blog/ascii-crack</link>
+      <guid>https://0x1907.netlify.app/blog/ascii-crack</guid>
+      <description>
+This ia a writeup on a challange ASCII-CRACK(https://crackmes.one/crackme/69a806c17b3cc38c80464e06) from crackmes.one(https://crackmes.one)...</description>
+      <category>crackmes.one</category>
+      <pubDate>Tue, 31 Mar 2026 18:30:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title>Polyglot Patterns — The Same Idea in Every Language</title>
+      <link>https://0x1907.netlify.app/blog/polyglot-patterns</link>
+      <guid>https://0x1907.netlify.app/blog/polyglot-patterns</guid>
+      <description>
+Every language has its own way of expressing the same fundamental ideas. Here&apos;s a quick tour of common patterns written in seven languages — a handy reference and a reminder that good code is good co...</description>
+      <category>Programming</category>
+      <pubDate>Sun, 08 Mar 2026 18:30:00 GMT</pubDate>
+    </item>
+
     <item>
       <title>Building a Modern CLI in Rust</title>
       <link>https://0x1907.netlify.app/blog/rust-cli</link>

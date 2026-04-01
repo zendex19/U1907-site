@@ -194,6 +194,17 @@
   .code-block .shiki-container code {
     @apply font-mono text-[14px];
     background: transparent !important;
+    counter-reset: code-line;
+  }
+
+  .code-block .shiki-container .shiki .line::before {
+    counter-increment: code-line;
+    content: counter(code-line);
+    display: inline-block;
+    width: 2rem;
+    margin-right: 1.25rem;
+    text-align: right;
+    color: hsl(var(--muted-foreground) / 0.5);
   }
 
   .code-block .shiki-container .shiki {
@@ -311,7 +322,7 @@
   }
   
   .blog-prose img {
-    @apply rounded-md my-6 cursor-zoom-in;
+    @apply rounded-md my-5 cursor-zoom-in;
     transition: opacity 0.2s ease;
   }
   
