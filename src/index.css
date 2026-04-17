@@ -255,69 +255,75 @@
 /* Blog prose styling */
 @layer components {
   .blog-prose {
-    @apply text-base leading-7;
-    color: hsl(var(--foreground) / 0.9);
+    @apply text-[15.5px] leading-[1.75];
+    color: hsl(var(--foreground) / 0.82);
+    font-weight: 400;
   }
-  
+
   .blog-prose h1 {
-    @apply text-3xl font-semibold tracking-tight mb-6;
+    @apply text-[2rem] font-semibold mb-5;
     color: hsl(var(--foreground));
-    letter-spacing: -0.5px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
-  
+
   .blog-prose h2 {
-    @apply text-2xl font-semibold tracking-tight mt-10 mb-4;
+    @apply text-[1.5rem] font-semibold mt-12 mb-4;
     color: hsl(var(--foreground));
+    letter-spacing: -0.015em;
     scroll-margin-top: 100px;
   }
-  
+
   .blog-prose h3 {
-    @apply text-xl font-semibold tracking-tight mt-8 mb-3;
+    @apply text-[1.2rem] font-semibold mt-9 mb-3;
     color: hsl(var(--foreground));
+    letter-spacing: -0.01em;
     scroll-margin-top: 100px;
   }
-  
+
   .blog-prose p {
     @apply mb-5;
   }
-  
+
   .blog-prose ul,
   .blog-prose ol {
     @apply mb-5 pl-6;
   }
-  
+
   .blog-prose ul {
     @apply list-disc;
   }
-  
+
   .blog-prose ol {
     @apply list-decimal;
   }
-  
+
   .blog-prose li {
     @apply mb-2;
   }
-  
+
   .blog-prose blockquote {
     @apply border-l-2 pl-4 my-5 italic;
-    border-color: hsl(var(--muted-foreground));
+    border-color: hsl(var(--accent) / 0.6);
     color: hsl(var(--muted-foreground));
   }
-  
+
   .blog-prose a {
-    @apply underline underline-offset-4;
-    color: hsl(var(--foreground));
+    @apply underline underline-offset-[3px] decoration-1 transition-colors;
+    color: hsl(var(--accent-link));
+    text-decoration-color: hsl(var(--accent-link) / 0.4);
   }
-  
+
   .blog-prose a:hover {
-    color: hsl(var(--muted-foreground));
+    color: hsl(var(--foreground));
+    text-decoration-color: hsl(var(--foreground) / 0.6);
   }
-  
+
   .blog-prose strong {
     @apply font-semibold;
     color: hsl(var(--foreground));
   }
-  
+
   .blog-prose hr {
     @apply my-8 border-border;
   }
