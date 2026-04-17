@@ -14,8 +14,8 @@ const ProjectsPage = () => {
               Projects
             </h1>
             <p className="text-muted-foreground text-base md:text-lg max-w-[640px] leading-relaxed">
-              A small collection of things I've built — homelab setups, scripts that
-              quietly run my life, and security experiments.
+              A small collection of things I've built — fun tools, scripts that
+              quietly run my life, and terminal apps!.
             </p>
           </header>
 
@@ -27,14 +27,16 @@ const ProjectsPage = () => {
                   className="group h-full flex flex-col rounded-lg overflow-hidden border border-border hover:border-muted-foreground/40 transition-colors animate-fade-in opacity-0"
                   style={{ animationDelay: `${i * 80}ms`, animationFillMode: "both" }}
                 >
-                  <div className="aspect-[16/10] overflow-hidden bg-muted">
+                  {/* CHANGED THIS SECTION: Removed aspect ratio, updated image sizing */}
+                  <div className="overflow-hidden bg-muted">
                     <img
                       src={project.image}
                       alt={project.title}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>
+                  
                   <div className="flex-1 flex flex-col p-5">
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <h2 className="text-[17px] font-semibold tracking-tight text-foreground group-hover:text-accent-link transition-colors">
