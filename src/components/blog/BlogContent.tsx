@@ -181,8 +181,8 @@ export const BlogContent = ({ post }: BlogContentProps) => {
   return (
     <>
       <main ref={mainRef} className="flex-1 py-8 md:py-[60px] px-4 sm:px-6 md:px-10 md:pl-12 overflow-y-auto overflow-x-hidden bg-background">
-        <div className="w-full max-w-[1100px] mx-auto flex flex-col lg:flex-row lg:gap-12 xl:gap-16">
-          <article key={post.id} className="w-full lg:max-w-[700px] blog-prose min-w-0 lg:flex-1 animate-fade-in-up">
+        <div className="w-full max-w-[1280px] mx-auto flex flex-col lg:flex-row lg:gap-12 xl:gap-16">
+          <article key={post.id} className="w-full lg:max-w-[820px] blog-prose min-w-0 lg:flex-1 animate-fade-in-up">
             <h1>{post.title}</h1>
             <div className="flex flex-wrap items-center gap-3 mb-6 mt-[-16px]">
               {post.date && (
