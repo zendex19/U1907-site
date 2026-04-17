@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 const Index = lazy(() => import("./pages/Index"));
 const TagsPage = lazy(() => import("./pages/TagsPage"));
 const TimelinePage = lazy(() => import("./pages/TimelinePage"));
+const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/blog/:postId" element={<Index />} />
           <Route path="/tags" element={<TagsPage />} />
           <Route path="/tags/:tag" element={<TagsPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
