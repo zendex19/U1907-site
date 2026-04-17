@@ -68,7 +68,9 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
+        sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Inter', 'Segoe UI', 'Roboto', 'sans-serif'],
         mono: ["JetBrains Mono", "Fira Code", "Monaco", "Consolas", "monospace"],
+        display: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {
