@@ -1,4 +1,4 @@
-import { Moon, Sun, Menu, X, Tag, AlignLeft } from "lucide-react";
+import { Moon, Sun, Menu, X, Tag, AlignLeft, FolderGit2 } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
@@ -38,6 +38,18 @@ export const TopBar = ({ sidebarOpen, onToggleSidebar, showMenuButton = true, sh
       </div>
 
       <div className="flex items-center gap-4">
+        {/* Projects link */}
+        <Link
+          to="/projects"
+          className="group flex items-center text-muted-foreground hover:text-foreground transition-colors"
+          title="Projects"
+        >
+          <FolderGit2 className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+          <span className="overflow-hidden w-0 group-hover:w-16 transition-all duration-200 ease-out text-sm whitespace-nowrap">
+            &nbsp;Projects
+          </span>
+        </Link>
+
         {/* Timeline link */}
         {showTimelineLink && (
           <Link
