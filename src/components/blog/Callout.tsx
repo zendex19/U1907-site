@@ -11,23 +11,23 @@ interface CalloutProps {
 const variantConfig: Record<CalloutVariant, { label: string; rail: string; accent: string }> = {
   note: {
     label: "Note",
-    rail: "border-l-sky-400/60 dark:border-l-sky-300/50",
-    accent: "text-sky-600 dark:text-sky-300/90",
+    rail: "border-l-foreground/25",
+    accent: "text-foreground/55",
   },
   tip: {
     label: "Tip",
-    rail: "border-l-emerald-500/60 dark:border-l-emerald-300/50",
-    accent: "text-emerald-700 dark:text-emerald-300/90",
+    rail: "border-l-foreground/45",
+    accent: "text-foreground/75",
   },
   warning: {
     label: "Warning",
-    rail: "border-l-amber-500/70 dark:border-l-amber-300/60",
-    accent: "text-amber-700 dark:text-amber-300/90",
+    rail: "border-l-amber-600/70 dark:border-l-amber-300/50",
+    accent: "text-amber-700 dark:text-amber-300/85",
   },
   question: {
     label: "Question",
-    rail: "border-l-violet-500/60 dark:border-l-violet-300/50",
-    accent: "text-violet-700 dark:text-violet-300/90",
+    rail: "border-l-foreground/35 italic",
+    accent: "text-foreground/65 italic",
   },
 };
 
