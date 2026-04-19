@@ -24,7 +24,6 @@ const HomePage = () => {
   }, []);
 
   const recentPosts = posts.slice(0, 3);
-  // Removed featuredProjects variable
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -35,7 +34,7 @@ const HomePage = () => {
           <section className="mb-16 md:mb-20">
             <div className="flex items-center gap-4 mb-4">
               <img
-                src="/pfp.png"
+                src="/pfp.webp"
                 alt="zendex"
                 width={96}
                 height={96}

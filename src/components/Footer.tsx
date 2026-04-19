@@ -4,7 +4,7 @@ export const Footer = () => {
       <p className="text-xs text-muted-foreground/70">
         © 2026 zendex19 · Licensed under{" "}
         <a
-          href="https://github.com/zendex19/zendex19-site/blob/main/LICENSE"
+          href="https://creativecommons.org/licenses/by/4.0/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline underline-offset-2 hover:text-muted-foreground transition-colors"
