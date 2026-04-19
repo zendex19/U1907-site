@@ -46,13 +46,13 @@ const HomePage = () => {
                 zendex
               </h1>
             </div>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-4">
+            <p className="text-foreground/80 text-base md:text-lg leading-relaxed mb-4">
               I spend most of my time homelabbing and tinkering with self-hosted stuff.
               I automate pretty much everything I can.
               Lately, I've been getting into malware analysis — it's actually fun!
             </p>
-            <p className="text-muted-foreground text-sm">
-              Automation Practitioner · Systems Thinker ·
+            <p className="text-foreground/80 text-sm">
+              Systems Thinker ·
               <a href="mailto:zendexino@gmail.com" className="ml-1 underline underline-offset-4 hover:text-foreground transition-colors">
                 zendexino@gmail.com
               </a>

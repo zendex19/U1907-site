@@ -90,7 +90,7 @@ export const TopBar = ({ sidebarOpen, onToggleSidebar, showMenuButton = true, sh
         </button>
 
         <a
-          href="https://github.com/zndx-sh/zndx-blog"
+          href="https://github.com/zendex19"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub repository"
